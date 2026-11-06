@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are an idiot! (dot org)</title>
+    
+    <meta name="description" content="This is the orgional and the best flash video on the 'net. Once found on www.youdontknowwhoiam.org, not found where it belong, right here on...">
+    <meta name="author" content="The ADR and Jazzy">
+    
+    <link rel="icon" type="image/png" href="youareanidiot.png">
+    
+    <style>
+        /* Fondo blanco puro sin scrolls */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; 
+        }
+
+        /* Contenedor forzado al alto total de la ventana */
+        #flash-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Esto obliga al elemento de Ruffle a medir el 100% del alto de la pantalla */
+        #flash-container ruffle-player, 
+        #flash-container rfl-player,
+        #flash-container canvas {
+            width: auto !important;
+            height: 100vh !important; /* Choca arriba y abajo obligatoriamente */
+            aspect-ratio: 4 / 3 !important; /* Formato idéntico al de tu segunda foto */
+            display: block !important;
+        }
+    </style>
+
+    <!-- Cargamos Ruffle directamente desde su servidor oficial para que maneje el SWF -->
+    <script src="https://unpkg.com"></script>
+</head>
+<body>
+
+    <div id="flash-container"></div>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            // Inicializamos el emulador de Flash manualmente
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            
+            // Metemos el reproductor dentro de nuestro contenedor protegido
+            const container = document.getElementById("flash-container");
+            container.appendChild(player);
+            
+            // Configuramos las opciones para forzar el escalado completo y máxima seguridad
+            player.load({
+                url: "youare.swf",
+                allowScriptAccess: false,
+                scale: "exactfit",
+                quality: "high",
+                wmode: "opaque"
+            });
+        });
+    </script>
+
+</body>
+</html>
